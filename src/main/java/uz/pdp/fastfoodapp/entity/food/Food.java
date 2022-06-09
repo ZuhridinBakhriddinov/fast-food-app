@@ -3,6 +3,7 @@ package uz.pdp.fastfoodapp.entity.food;
 import lombok.*;
 import lombok.experimental.PackagePrivate;
 import uz.pdp.fastfoodapp.entity.attachment.Attachment;
+import uz.pdp.fastfoodapp.entity.user.Adress;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
@@ -27,6 +28,9 @@ public class Food extends AbsEntity {
     Attachment image;
     Boolean isAvailable;
     LocalTime availableFrom;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    Adress address;
     LocalTime availableTo;
 
 
