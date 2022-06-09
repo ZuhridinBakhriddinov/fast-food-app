@@ -2,6 +2,7 @@ package uz.pdp.fastfoodapp.entity.food;
 
 import lombok.*;
 import lombok.experimental.PackagePrivate;
+import uz.pdp.fastfoodapp.entity.attachment.Attachment;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;

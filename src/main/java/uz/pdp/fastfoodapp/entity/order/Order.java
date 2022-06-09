@@ -1,7 +1,8 @@
-package uz.pdp.fastfoodapp.entity.food;
+package uz.pdp.fastfoodapp.entity.order;
 
 import lombok.*;
 import lombok.experimental.PackagePrivate;
+import uz.pdp.fastfoodapp.entity.order.enums.OrderStatus;
 import uz.pdp.fastfoodapp.entity.user.User;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 

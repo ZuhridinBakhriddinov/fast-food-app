@@ -1,11 +1,11 @@
-package uz.pdp.fastfoodapp.entity.food;
+package uz.pdp.fastfoodapp.entity.attachment;
 
 import lombok.*;
 import lombok.experimental.PackagePrivate;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @EqualsAndHashCode(callSuper = true)
@@ -14,11 +14,11 @@ import javax.persistence.OneToOne;
 @Data
 @Builder
 @PackagePrivate
-@Entity(name = "feedbacks")
-public class Feedback extends AbsEntity {
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    Order order;
-    String text;
-    Integer rate;
+@Entity(name = "attachment_contents")
+public class AttachmentContent extends AbsEntity {
+    @OneToOne(cascade = CascadeType.MERGE)
+    Attachment attachment;
+    byte [] data;
+
+
 }
