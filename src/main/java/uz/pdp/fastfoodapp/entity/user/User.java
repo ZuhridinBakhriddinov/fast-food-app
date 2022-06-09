@@ -13,6 +13,7 @@ import uz.pdp.fastfoodapp.template.AbsEntity;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -29,8 +30,13 @@ public class User extends AbsEntity implements UserDetails {
     private String phoneNumber;
 
     @Column(nullable = false)
-    private String smsCode;
+    private boolean isBlocked;
 
+    @ManyToMany
+    private List<Roles> roles;
+
+    @ManyToMany
+    private List<Permissions> permissions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -39,8 +45,9 @@ public class User extends AbsEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.smsCode;
+        return null;
     }
+
 
     @Override
     public String getUsername() {
