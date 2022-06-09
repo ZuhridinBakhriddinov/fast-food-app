@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.PackagePrivate;
 import uz.pdp.fastfoodapp.entity.enums.PayType;
-import uz.pdp.fastfoodapp.entity.food.Order;
+import uz.pdp.fastfoodapp.entity.order.Order;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
