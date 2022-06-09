@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Builder
 @Data
-@Entity(name = "adress")
+@Entity(name = "addresses")
 public class Address extends AbsEntity {
     @ManyToOne
     private User user;
