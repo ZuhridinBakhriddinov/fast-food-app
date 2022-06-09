@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 @Entity(name = "roles")
 public class Roles extends AbsEntity {
     private String name;
+
     private Role role;
 
 }
