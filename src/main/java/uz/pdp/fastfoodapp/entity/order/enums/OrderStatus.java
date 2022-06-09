@@ -1,4 +1,4 @@
-package uz.pdp.fastfoodapp.entity.food;
+package uz.pdp.fastfoodapp.entity.order.enums;
 
 public enum OrderStatus {
     PENDING,
