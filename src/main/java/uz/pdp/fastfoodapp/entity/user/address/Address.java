@@ -1,18 +1,21 @@
-package uz.pdp.fastfoodapp.entity.user;
+package uz.pdp.fastfoodapp.entity.user.address;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import uz.pdp.fastfoodapp.entity.user.district.District;
+import uz.pdp.fastfoodapp.entity.user.User;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 @Entity(name = "adress")
-public class Adress extends AbsEntity {
+public class Address extends AbsEntity {
     @ManyToOne
     private User user;
     private String name;
