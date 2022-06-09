@@ -1,10 +1,8 @@
-package uz.pdp.fastfoodapp.entity.user;
+package uz.pdp.fastfoodapp.entity.user.role;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import uz.pdp.fastfoodapp.entity.user.role.Role;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
@@ -12,6 +10,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 @Entity(name = "roles")
 public class Roles extends AbsEntity {
