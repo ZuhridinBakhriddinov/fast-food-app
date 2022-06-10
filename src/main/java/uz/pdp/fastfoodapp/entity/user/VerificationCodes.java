@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
-import java.sql.Timestamp;
+//import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
