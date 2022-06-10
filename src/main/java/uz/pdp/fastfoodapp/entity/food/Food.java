@@ -21,8 +21,14 @@ import java.time.LocalTime;
 @Entity(name = "foods")
 public class Food extends AbsEntity {
 
-    String name;
-    String description;
+    String nameUz;
+    String nameRu;
+    String nameOz;
+    String nameEn;
+    String descriptionUz;
+    String descriptionRu;
+    String descriptionOz;
+    String descriptionEn;
     Double price;
     @OneToOne
     @JoinColumn(name = "image_id")
