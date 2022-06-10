@@ -28,13 +28,13 @@ public class DistrictController {
     }
 
     @PostMapping
-    public HttpEntity<?> addDistrict(@RequestPart District district) {
+    public HttpEntity<?> addDistrict(@RequestBody District district) {
         ApiResponse apiResponse = districtServise.addDistrict(district);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }
 
     @PutMapping("/{uuid}")
-    public HttpEntity<?> editDistrict(@PathVariable UUID uuid, @RequestPart District district) {
+    public HttpEntity<?> editDistrict(@PathVariable UUID uuid, @RequestBody District district) {
         ApiResponse apiResponse = districtServise.editDistrict(uuid, district);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }
