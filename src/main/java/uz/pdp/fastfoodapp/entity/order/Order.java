@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @PackagePrivate
-@Entity(name = "orders")
+@Entity(name = "my_orders")
 public class Order extends AbsEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
