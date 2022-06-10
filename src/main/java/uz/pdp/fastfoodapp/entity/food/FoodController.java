@@ -2,10 +2,7 @@ package uz.pdp.fastfoodapp.entity.food;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${app.domain}" + "/food")
@@ -19,6 +16,6 @@ public class FoodController {
         return foodService.getAllFoods();
     }
 
-//    @PostMapping
-//    public
+    @PostMapping
+    public ResponseEntity<?> addFood(@RequestBody )
 }
