@@ -19,6 +19,6 @@ public class FoodController {
         return foodService.getAllFoods();
     }
 
-    @PostMapping
-    public
+//    @PostMapping
+//    public
 }
