@@ -5,7 +5,7 @@ import lombok.*;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
-import java.sql.Timestamp;
+//import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)

@@ -17,13 +17,12 @@ import java.time.LocalTime;
 @Data
 @Builder
 @PackagePrivate
-@Entity(name = "orders")
+@Entity(name = "my_orders")
 public class Order extends AbsEntity {
     @ManyToOne
-    @JoinColumn(name = "user_id")
     User user;
     @ManyToOne
-    @JoinColumn(name = "deliverer_id")
+
     User deliverer;
     Integer orderNumber;
     LocalDateTime deliveredAt;
