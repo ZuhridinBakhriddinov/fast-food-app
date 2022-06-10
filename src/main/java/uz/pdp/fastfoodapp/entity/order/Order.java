@@ -17,7 +17,7 @@ import java.time.LocalTime;
 @Data
 @Builder
 @PackagePrivate
-@Entity(name = "orders")
+@Entity(name = "my_orders")
 public class Order extends AbsEntity {
     @ManyToOne
     User user;
