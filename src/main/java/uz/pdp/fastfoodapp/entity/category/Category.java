@@ -21,5 +21,8 @@ public class Category extends AbsEntity {
     String nameOz;
     String nameEn;
     String descriptionUz;
+    String descriptionRu;
+    String descriptionOz;
+    String descriptionEn;
 
 }
