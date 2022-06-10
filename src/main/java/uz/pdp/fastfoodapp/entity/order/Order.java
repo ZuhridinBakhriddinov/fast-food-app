@@ -20,10 +20,9 @@ import java.time.LocalTime;
 @Entity(name = "orders")
 public class Order extends AbsEntity {
     @ManyToOne
-    @JoinColumn(name = "user_id")
     User user;
     @ManyToOne
-    @JoinColumn(name = "deliverer_id")
+
     User deliverer;
     Integer orderNumber;
     LocalDateTime deliveredAt;
