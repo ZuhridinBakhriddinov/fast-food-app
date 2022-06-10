@@ -17,13 +17,11 @@ import javax.persistence.OneToOne;
 @Data
 @Builder
 @PackagePrivate
-@Entity(name = "orders")
+@Entity(name = "orderItems")
 public class OrderItem extends AbsEntity {
     @OneToOne
-    @JoinColumn(name = "food_id")
     Food food;
     @ManyToOne
-    @JoinColumn(name = "order_id")
     Order order;
 
 }

@@ -4,10 +4,12 @@ import lombok.*;
 import lombok.experimental.PackagePrivate;
 import uz.pdp.fastfoodapp.entity.attachment.Attachment;
 import uz.pdp.fastfoodapp.entity.user.address.Address;
+import uz.pdp.fastfoodapp.entity.category.Category;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.time.LocalTime;
 
@@ -20,8 +22,14 @@ import java.time.LocalTime;
 @Entity(name = "foods")
 public class Food extends AbsEntity {
 
-    String name;
-    String description;
+    String nameUz;
+    String nameRu;
+    String nameOz;
+    String nameEn;
+    String descriptionUz;
+    String descriptionRu;
+    String descriptionOz;
+    String descriptionEn;
     Double price;
     @OneToOne
     @JoinColumn(name = "image_id")
@@ -32,6 +40,10 @@ public class Food extends AbsEntity {
     @JoinColumn(name = "address_id")
     Address address;
     LocalTime availableTo;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    Category category;
+    Integer preparationTimeInMin;
 
 
 }
