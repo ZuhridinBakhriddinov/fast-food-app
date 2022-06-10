@@ -1,4 +1,4 @@
-package uz.pdp.fastfoodapp.entity.user;
+package uz.pdp.fastfoodapp.entity.user.role;
 
 public enum Role {
     SUPER_ADMIN,
