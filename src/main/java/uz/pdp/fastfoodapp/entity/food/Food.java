@@ -3,11 +3,13 @@ package uz.pdp.fastfoodapp.entity.food;
 import lombok.*;
 import lombok.experimental.PackagePrivate;
 import uz.pdp.fastfoodapp.entity.attachment.Attachment;
+import uz.pdp.fastfoodapp.entity.category.Category;
 import uz.pdp.fastfoodapp.entity.user.Adress;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.time.LocalTime;
 
@@ -32,6 +34,10 @@ public class Food extends AbsEntity {
     @JoinColumn(name = "address_id")
     Adress address;
     LocalTime availableTo;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    Category category;
+    Integer preparationTimeInMin;
 
 
 }

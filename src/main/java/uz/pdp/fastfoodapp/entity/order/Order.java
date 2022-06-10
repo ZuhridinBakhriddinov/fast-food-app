@@ -31,6 +31,4 @@ public class Order extends AbsEntity {
     Double totalSum;
     Double deliveryPrice;
 
-
-
 }
