@@ -23,12 +23,12 @@ public class SitInfoService {
         return new ApiResponse("Success", true, all);
     }
 
-    public ApiResponse getSitInfoById(UUID id) {
-        Optional<SiteInfo> optionalAgent = sitInfoRepository.findById(id);
-        if (optionalAgent.isEmpty()) {
+    public ApiResponse getSitInfoById(UUID uuid) {
+        Optional<SiteInfo> optionalSiteInfo = sitInfoRepository.findById(uuid);
+        if (optionalSiteInfo.isEmpty()) {
             return new ApiResponse("Not found", false);
         }
-        return new ApiResponse("Success", true, optionalAgent);
+        return new ApiResponse("Success", true, optionalSiteInfo);
     }
 
     public ApiResponse addSiteInfo(SiteInfo siteInfo) {
@@ -42,26 +42,26 @@ public class SitInfoService {
     }
 
     public ApiResponse editSitInfo(SiteInfo siteInfo, UUID uuid) {
-        Optional<SiteInfo> optionalAgent = sitInfoRepository.findById(uuid);
-        if (optionalAgent.isEmpty()) {
-            return new ApiResponse("Agents not found", false);
+        Optional<SiteInfo> optionalSiteInfo = sitInfoRepository.findById(uuid);
+        if (optionalSiteInfo.isEmpty()) {
+            return new ApiResponse("SitInfo not found", false);
         }
         try {
-            SiteInfo editSitInfo = optionalAgent.get();
+            SiteInfo editSitInfo = optionalSiteInfo.get();
 
             editSitInfo.setAddress(siteInfo.getAddress());
             editSitInfo.setPhoneNumber(siteInfo.getPhoneNumber());
             editSitInfo.setLatitude(siteInfo.getLatitude());
             editSitInfo.setLongitude(siteInfo.getLongitude());
 
-                       SiteInfo save = sitInfoRepository.save(editSitInfo);
+            SiteInfo save = sitInfoRepository.save(editSitInfo);
             return new ApiResponse("Successfully edited", true, save);
         } catch (Exception e) {
             return new ApiResponse("Error", false);
         }
     }
 
-    public ApiResponse deleteSitInfo (UUID uuid){
+    public ApiResponse deleteSitInfo(UUID uuid) {
         try {
             sitInfoRepository.deleteById(uuid);
             return new ApiResponse("Successfully deleted", true);
