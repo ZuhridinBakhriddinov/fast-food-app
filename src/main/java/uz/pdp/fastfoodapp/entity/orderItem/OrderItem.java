@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 @Data
 @Builder
 @PackagePrivate
-@Entity(name = "my_orders")
+@Entity(name = "orderItems")
 public class OrderItem extends AbsEntity {
     @OneToOne
     Food food;

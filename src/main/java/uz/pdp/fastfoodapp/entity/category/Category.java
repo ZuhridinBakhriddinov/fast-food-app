@@ -21,8 +21,8 @@ public class Category extends AbsEntity {
     String nameOz;
     String nameEn;
     String descriptionUz;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    Category category;
-    Integer preparationTimeInMin;
+    String descriptionRu;
+    String descriptionOz;
+    String descriptionEn;
+
 }

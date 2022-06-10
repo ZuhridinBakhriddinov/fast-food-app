@@ -1,24 +1,21 @@
 package uz.pdp.fastfoodapp.entity.user;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import uz.pdp.fastfoodapp.entity.user.permission.Permissions;
+import uz.pdp.fastfoodapp.entity.user.role.Roles;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 @Entity(name = "users")
 public class User extends AbsEntity implements UserDetails {

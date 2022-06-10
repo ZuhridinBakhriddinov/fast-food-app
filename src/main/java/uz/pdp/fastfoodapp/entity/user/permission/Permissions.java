@@ -1,15 +1,14 @@
-package uz.pdp.fastfoodapp.entity.user;
+package uz.pdp.fastfoodapp.entity.user.permission;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
-
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 @Entity(name = "permissions")
 public class Permissions extends AbsEntity {
