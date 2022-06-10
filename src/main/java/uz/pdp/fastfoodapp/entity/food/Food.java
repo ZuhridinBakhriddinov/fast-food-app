@@ -35,6 +35,7 @@ public class Food extends AbsEntity {
     Attachment image;
     Boolean isAvailable;
     LocalTime availableFrom;
+    LocalTime availableTo;
     @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;
