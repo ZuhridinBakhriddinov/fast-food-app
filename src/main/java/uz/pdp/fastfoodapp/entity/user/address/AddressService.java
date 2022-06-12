@@ -39,27 +39,27 @@ public class AddressService {
         return new ApiResponse("Successfully", true, byId);
     }
 
-    public ApiResponse addAddress(Address address, UUID uuid) {
-        Optional<User> userId = userRepository.findById(uuid);
+    public ApiResponse addAddress(AddressDto addressDto) {
+        Optional<User> userId = userRepository.findById(addressDto.getUserId());
         if (userId.isEmpty()) {
             return new ApiResponse("User not found", false);
         }
-        Optional<District> districtId = districtRepository.findById(uuid);
+        Optional<District> districtId = districtRepository.findById(addressDto.getDistrictId());
         if (districtId.isEmpty()) {
             return new ApiResponse("District not found", false);
         }
         try {
-            Address save = addressRepository.save(new Address(userId.get(), address.getName(), districtId.get(), address.getLandmark(),
-                    address.getHouseNumber(), address.getEntrance(), address.getFlat(),
-                    address.getFloor(), address.getLatitude(), address.getLongitude()));
+            Address save = addressRepository.save(new Address(userId.get(), addressDto.getName(), districtId.get(), addressDto.getLandmark(),
+                    addressDto.getHouseNumber(), addressDto.getEntrance(), addressDto.getFlat(),
+                    addressDto.getFloor(), addressDto.getLatitude(), addressDto.getLongitude()));
             return new ApiResponse("Successfully saved", true, save);
         } catch (Exception e) {
             return new ApiResponse("Error! Maybe address already exists!!", false);
         }
     }
 
-    public ApiResponse editAddress(UUID adressId, AddressDto addressDto) {
-        Optional<Address> optionalAddress = addressRepository.findById(adressId);
+    public ApiResponse editAddress(UUID addressId, AddressDto addressDto) {
+        Optional<Address> optionalAddress = addressRepository.findById(addressId);
         if (optionalAddress.isEmpty()) {
             return new ApiResponse("Address not found", false);
         }

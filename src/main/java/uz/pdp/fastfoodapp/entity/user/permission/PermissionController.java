@@ -29,13 +29,13 @@ public class PermissionController {
     }
 
     @PostMapping
-    public HttpEntity<?> addPermission(@RequestPart Permissions permission) {
+    public HttpEntity<?> addPermission(@RequestBody Permissions permission) {
         ApiResponse apiResponse = permissionService.addPermission(permission);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }
 
     @PutMapping("/{uuid}")
-    public HttpEntity<?> editPermission(@PathVariable UUID uuid, @RequestPart Permissions permission) {
+    public HttpEntity<?> editPermission(@PathVariable UUID uuid, @RequestBody Permissions permission) {
         ApiResponse apiResponse = permissionService.editPermission(uuid, permission);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }

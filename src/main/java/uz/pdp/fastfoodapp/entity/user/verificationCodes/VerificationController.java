@@ -27,13 +27,13 @@ public class VerificationController {
     }
 
     @PostMapping
-    public HttpEntity<?> addVerificationCode(@RequestPart VerificationCodes verificationCodes) {
+    public HttpEntity<?> addVerificationCode(@RequestBody VerificationCodes verificationCodes) {
         ApiResponse apiResponse = verificationService.addVerificationCode(verificationCodes);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }
 
     @PutMapping("/{uuid}")
-    public HttpEntity<?> editVerificationCode(@PathVariable UUID uuid, @RequestPart VerificationCodes verificationCodes) {
+    public HttpEntity<?> editVerificationCode(@PathVariable UUID uuid, @RequestBody VerificationCodes verificationCodes) {
         ApiResponse apiResponse = verificationService.editVerificationCodes(uuid, verificationCodes);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }

@@ -1,7 +1,6 @@
 package com.footzone.footzone.entity.sms;
 
 
-//Asliddin Kenjaev, created: May, 13 2022 11:58 AM 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
