@@ -11,13 +11,18 @@ public class FoodController {
 
     private final FoodService foodService;
 
-    @GetMapping
-    public ResponseEntity<?> getAllFoods(){
-        return foodService.getAllFoods();
-    }
+//    @GetMapping
+//    public ResponseEntity<?> getAllFoods(){
+//        return foodService.getAllFoods();
+//    }
 
     @PostMapping
     public ResponseEntity<?> addFood(@RequestBody FoodDto foodDto){
         return foodService.addFood(foodDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getFoods(){
+        return foodService.getFoods();
     }
 }
