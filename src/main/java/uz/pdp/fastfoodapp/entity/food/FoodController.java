@@ -17,5 +17,7 @@ public class FoodController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addFood(@RequestBody )
+    public ResponseEntity<?> addFood(){
+        return null;
+    }
 }
