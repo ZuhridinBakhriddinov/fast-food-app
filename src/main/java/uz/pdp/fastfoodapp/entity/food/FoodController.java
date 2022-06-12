@@ -17,7 +17,7 @@ public class FoodController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addFood(){
-        return null;
+    public ResponseEntity<?> addFood(@RequestBody FoodDto foodDto){
+        return foodService.addFood(foodDto);
     }
 }
