@@ -58,4 +58,11 @@ public class FoodService {
         Food savedFood = foodRepository.save(food);
         return ResponseEntity.ok(savedFood);
     }
+
+    public ResponseEntity<?> getFoods() {
+
+        List<FoodProjection>  foods = foodRepository.getFoods();
+
+        return ResponseEntity.ok(foods);
+    }
 }
