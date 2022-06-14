@@ -3,6 +3,7 @@ package uz.pdp.fastfoodapp.entity.food;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import uz.pdp.fastfoodapp.entity.attachment.Attachment;
 import uz.pdp.fastfoodapp.entity.attachment.AttachmentService;
 import uz.pdp.fastfoodapp.entity.category.Category;
@@ -23,8 +24,8 @@ public class FoodService {
         return ResponseEntity.ok(all);
     }
 
-    public ResponseEntity<?> addFood(FoodDto foodDto) {
-        Attachment savedImage = attachmentService.downloadAndGetImage(foodDto.getImage());
+    public ResponseEntity<?> addFood(FoodDto foodDto, MultipartFile image) {
+        Attachment savedImage = attachmentService.downloadAndGetImage(image);
         String nameRu = foodDto.getNameRu().isEmpty() ? foodDto.getNameUz() : foodDto.getNameRu();
         String nameOz = foodDto.getNameOz().isEmpty() ? foodDto.getNameUz() : foodDto.getNameOz();
         String nameEn = foodDto.getNameEn().isEmpty() ? foodDto.getNameUz() : foodDto.getNameEn();
@@ -61,7 +62,7 @@ public class FoodService {
 
     public ResponseEntity<?> getFoods() {
 
-        List<FoodProjection>  foods = foodRepository.getFoods();
+        List<CategoryWithFoodProjection>  foods = foodRepository.getFoodsByCategory();
 
         return ResponseEntity.ok(foods);
     }

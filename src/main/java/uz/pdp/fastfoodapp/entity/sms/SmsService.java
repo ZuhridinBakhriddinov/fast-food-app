@@ -1,3 +1,4 @@
+/*
 package com.footzone.footzone.entity.sms;
 
 
@@ -143,3 +144,4 @@ public class SmsService {
     }
 
 }
+*/

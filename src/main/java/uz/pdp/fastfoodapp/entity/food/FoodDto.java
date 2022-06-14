@@ -29,7 +29,6 @@ public class FoodDto {
     String descriptionOz;
     String descriptionEn;
     Double price;
-    MultipartFile image;
     LocalTime availableFrom;
     LocalTime availableTo;
     UUID categoryId;

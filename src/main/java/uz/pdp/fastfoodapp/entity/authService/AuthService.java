@@ -1,3 +1,4 @@
+/*
 package com.footzone.footzone.authService;
 
 import com.footzone.footzone.entity.device.Device;
@@ -112,3 +113,4 @@ public class AuthService implements UserDetailsService {
     }
 
 }
+*/

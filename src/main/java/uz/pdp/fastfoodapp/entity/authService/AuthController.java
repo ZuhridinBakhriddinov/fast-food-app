@@ -1,15 +1,13 @@
-package com.footzone.footzone.authService;
+/*
 
 
-import com.footzone.footzone.common.ApiResponse;
-import com.footzone.footzone.entity.sms.SmsDto;
-import com.footzone.footzone.security.JwtProvider;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -31,3 +29,4 @@ public class AuthController {
         return authService.loginUser(loginDto);
     }
 }
+*/

@@ -9,11 +9,17 @@ import java.util.UUID;
 public interface FoodRepository extends JpaRepository<Food, UUID> {
 
     @Query(value = "select cast(f.id as varchar) foodId,\n" +
-            "       f.name_uz as name,\n" +
-            "       price as price,\n" +
-            "       cast(a.id as varchar) as imageId,\n" +
-            "       c.name_uz as categoryName\n" +
-            "from foods f join attachments a on a.id = f.image_id\n" +
-            "join categories c on c.id = f.category_id",nativeQuery = true)
-    List<FoodProjection> getFoods();
+            "                   f.name_uz as name,\n" +
+            "                   price as price,\n" +
+            "                   cast(a.id as varchar) as imageId\n" +
+            "           from foods f join attachments a on a.id = f.image_id\n" +
+            "where f.category_id =:categoryId",nativeQuery = true)
+    List<FoodProjection> getFoods(UUID categoryId );
+
+
+    @Query(nativeQuery = true,value = "select cast(c.id as varchar) as categoryId ,c.name_uz as categoryName\n" +
+            "from categories c")
+    List<CategoryWithFoodProjection> getFoodsByCategory();
+
+
 }

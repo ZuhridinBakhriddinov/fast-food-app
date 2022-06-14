@@ -1,6 +1,7 @@
-package com.footzone.footzone.authService;
+/*
+package uz.pdp.fastfoodapp.entity.authService;
 
-import com.footzone.footzone.enums.Language;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,3 +46,4 @@ public class RegisterDto {
     private String deviceToken;
 
 }
+*/
