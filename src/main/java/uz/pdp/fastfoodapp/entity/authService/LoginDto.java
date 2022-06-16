@@ -1,4 +1,4 @@
-package com.footzone.footzone.authService;
+package uz.pdp.fastfoodapp.entity.authService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,16 +18,5 @@ public class LoginDto {
 
     @NotNull(message = "code cannot be null.")
     private int codeSent;
-
-    @NotNull(message = "Field is required")
-    @NotBlank(message = "Device name cannot be blank.")
-    private String deviceName;
-
-    private String deviceType = "mobile";
-
-    @NotNull(message = "Field is required")
-    @NotBlank(message = "Device token cannot be blank.")
-    private String deviceToken;
-
 
 }
