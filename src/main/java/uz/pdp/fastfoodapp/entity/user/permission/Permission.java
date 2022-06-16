@@ -11,6 +11,6 @@ import javax.persistence.Entity;
 @Builder
 @Data
 @Entity(name = "permissions")
-public class Permissions extends AbsEntity {
+public class Permission extends AbsEntity {
     private String name;
 }

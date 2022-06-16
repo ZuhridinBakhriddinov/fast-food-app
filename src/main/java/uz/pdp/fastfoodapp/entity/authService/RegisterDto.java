@@ -1,4 +1,3 @@
-/*
 package uz.pdp.fastfoodapp.entity.authService;
 
 
@@ -13,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterDto {
-
     @NotNull(message = "Field is required")
     @NotBlank(message = "Full Name cannot be blank.")
     private String fullName;
@@ -23,27 +21,6 @@ public class RegisterDto {
     private String phoneNumber;
 
     @NotNull(message = "Field is required")
-    @NotBlank(message = "SMS code cannot be blank.")
-    private String smsCode;
-
-    @NotNull(message = "Field is required")
-//    @NotBlank(message = "Language cannot be blank.")
-    private Language language;
-
-    @NotNull(message = "Field is required")
-    private boolean isStadiumHolder;
-
-    @NotNull(message = "Field is required")
-    @NotBlank(message = "Device name cannot be blank.")
-    private String deviceName;
-
-//    @NotNull(message = "Field is required")
-//    @NotBlank(message = "Device type cannot be blank.")
-    private String deviceType;
-
-    @NotNull(message = "Field is required")
-    @NotBlank(message = "Device token cannot be blank.")
-    private String deviceToken;
-
+//    @NotBlank(message = "SMS code cannot be blank.")
+    private int smsCode;
 }
-*/

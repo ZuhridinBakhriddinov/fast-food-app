@@ -1,21 +1,26 @@
 package uz.pdp.fastfoodapp.entity.user;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import uz.pdp.fastfoodapp.entity.user.permission.Permissions;
+import uz.pdp.fastfoodapp.entity.user.permission.Permission;
+import uz.pdp.fastfoodapp.entity.user.role.Role;
 import uz.pdp.fastfoodapp.entity.user.role.Roles;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Entity(name = "users")
 public class User extends AbsEntity implements UserDetails {
@@ -27,24 +32,35 @@ public class User extends AbsEntity implements UserDetails {
     private String phoneNumber;
 
     @Column(nullable = false)
-    private boolean isBlocked;
+    private String smsCode;
 
     @ManyToMany
-    private List<Roles> roles;
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Set<Roles> roles;
 
     @ManyToMany
-    private List<Permissions> permissions;
+    @JoinTable(
+            name = "users_permissions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    Set<Permission> permissions;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        this.roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRole().name())));
+//        this.permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission.getName())));
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return this.smsCode;
     }
-
 
     @Override
     public String getUsername() {

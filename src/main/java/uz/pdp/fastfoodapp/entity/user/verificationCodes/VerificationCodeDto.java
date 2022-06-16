@@ -1,4 +1,8 @@
-package uz.pdp.fastfoodapp.entity.authService;
+
+package uz.pdp.fastfoodapp.entity.user.verificationCodes;
+
+
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,13 +14,13 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LoginDto {
-
+public class VerificationCodeDto {
     @NotNull(message = "Phone number cannot be null.")
     @NotBlank(message = "Phone number cannot be blank.")
     private String phoneNumber;
 
     @NotNull(message = "code cannot be null.")
+//    @NotBlank(message = "code cannot be blank.")
     private int codeSent;
 
 }

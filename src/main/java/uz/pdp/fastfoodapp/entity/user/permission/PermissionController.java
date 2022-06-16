@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.fastfoodapp.template.ApiResponse;
 
-import java.security.Permission;
 import java.util.UUID;
 
 @RestController
@@ -29,13 +28,13 @@ public class PermissionController {
     }
 
     @PostMapping
-    public HttpEntity<?> addPermission(@RequestBody Permissions permission) {
+    public HttpEntity<?> addPermission(@RequestBody Permission permission) {
         ApiResponse apiResponse = permissionService.addPermission(permission);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }
 
     @PutMapping("/{uuid}")
-    public HttpEntity<?> editPermission(@PathVariable UUID uuid, @RequestBody Permissions permission) {
+    public HttpEntity<?> editPermission(@PathVariable UUID uuid, @RequestBody Permission permission) {
         ApiResponse apiResponse = permissionService.editPermission(uuid, permission);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
     }
