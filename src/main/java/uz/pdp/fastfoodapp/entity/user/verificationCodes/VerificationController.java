@@ -1,46 +1,33 @@
 package uz.pdp.fastfoodapp.entity.user.verificationCodes;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.fastfoodapp.template.ApiResponse;
 
-import java.util.UUID;
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/verification")
+@RequiredArgsConstructor
+@RequestMapping("${app.domain}/verification")
 public class VerificationController {
-    @Autowired
-    VerificationService verificationService;
 
-    @GetMapping
-    public HttpEntity<?> getAllVerificationCodes() {
-        ApiResponse allVerificationCodes = verificationService.getAllVerificationCodes();
-        return ResponseEntity.status(allVerificationCodes.isSuccess() ? 200 : 400).body(allVerificationCodes);
+    private final VerificationService verificationService;
+
+
+    @GetMapping("/send/forRegister/{phoneNumber}")
+    public HttpEntity<?> sendSmsForUserRegistration(@PathVariable String phoneNumber) {
+        return verificationService.sendSmsForUserRegistration(phoneNumber);
     }
 
-    @GetMapping("/{uuid}")
-    public HttpEntity<?> getVerificationCodeById(@PathVariable UUID uuid) {
-        ApiResponse allVerificationCodesById = verificationService.getVerificationCodesById(uuid);
-        return ResponseEntity.status(allVerificationCodesById.isSuccess() ? 200 : 400).body(allVerificationCodesById);
+
+    @GetMapping("/send/forLogin/{phoneNumber}")
+    public HttpEntity<?> sendSmsForUserLogin(@PathVariable String phoneNumber) {
+        return verificationService.sendSmsForUserLogin(phoneNumber);
     }
 
-    @PostMapping
-    public HttpEntity<?> addVerificationCode(@RequestBody VerificationCodes verificationCodes) {
-        ApiResponse apiResponse = verificationService.addVerificationCode(verificationCodes);
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
+    @PostMapping("/validate/forRegister")
+    public HttpEntity<?> validateSmsForUserRegistration(@Valid @RequestBody VerificationCodeDto verificationDto) {
+        return verificationService.validateSmsForUserRegistration(verificationDto);
     }
 
-    @PutMapping("/{uuid}")
-    public HttpEntity<?> editVerificationCode(@PathVariable UUID uuid, @RequestBody VerificationCodes verificationCodes) {
-        ApiResponse apiResponse = verificationService.editVerificationCodes(uuid, verificationCodes);
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 400).body(apiResponse);
-    }
-
-    @DeleteMapping("/{uuid}")
-    public ResponseEntity<?> delete(@PathVariable UUID uuid) {
-        ApiResponse delete = verificationService.delete(uuid);
-        return ResponseEntity.status(delete.isSuccess() ? 200 : 400).body(delete);
-    }
 }
