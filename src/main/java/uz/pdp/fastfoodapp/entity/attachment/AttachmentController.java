@@ -2,6 +2,7 @@ package uz.pdp.fastfoodapp.entity.attachment;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,6 +18,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/getFile")
 public class AttachmentController {
+
+    @Autowired
+    AttachmentService attachmentService;
+
     @Autowired
     AttachmentRepository attachmentRepository;
 
@@ -42,6 +48,11 @@ public class AttachmentController {
         }
 
 
+    }
+
+    @GetMapping("/download/{attachmentId}")
+    public HttpEntity<?> getAttachmentFile(@PathVariable UUID attachmentId) throws IOException {
+        return attachmentService.fileDownload(attachmentId);
     }
 
 }
