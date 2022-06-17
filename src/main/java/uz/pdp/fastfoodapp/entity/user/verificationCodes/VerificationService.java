@@ -23,9 +23,9 @@ public class VerificationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private final String ACCOUNT_SID_TWILIO = "AC62c2958e5f305931ffdd03f18d6c0a93";
+    private final String ACCOUNT_SID_TWILIO = "";
 
-    private final String AUTH_TOKEN_TWILIO = "61fdeeda4ceddd16edf3248743ab3c9c";
+    private final String AUTH_TOKEN_TWILIO = "";
 
     public Integer sendSms(String phoneNumber) {
 
