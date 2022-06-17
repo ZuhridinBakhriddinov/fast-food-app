@@ -31,8 +31,8 @@ public class User extends AbsEntity implements UserDetails {
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    @Column(nullable = false)
-    private String smsCode;
+//    @Column(nullable = false)
+//    private String smsCode;
 
     @ManyToMany
     @JoinTable(
@@ -47,6 +47,14 @@ public class User extends AbsEntity implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id"))
     Set<Permission> permissions;
+    private String password = "12345";
+
+    public User(String fullName, String phoneNumber, Set<Roles> roles, Set<Permission> permissions) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.roles = roles;
+        this.permissions = permissions;
+    }
 
 
     @Override
@@ -59,7 +67,7 @@ public class User extends AbsEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.smsCode;
+        return this.password;
     }
 
     @Override

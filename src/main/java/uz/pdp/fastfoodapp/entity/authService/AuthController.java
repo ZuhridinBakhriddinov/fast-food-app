@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uz.pdp.fastfoodapp.entity.authService.LoginDto;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
@@ -28,5 +30,9 @@ public class AuthController {
     @PostMapping("/login")
     public HttpEntity<?> loginUser(@Valid @RequestBody LoginDto loginDto) {
         return authService.loginUser(loginDto);
+
+    }@PostMapping("/refresh/token")
+    public HttpEntity<?> refreshTheAccessToken(HttpServletRequest request, HttpServletResponse response) {
+        return authService.refreshAccessToken(request,response);
     }
 }

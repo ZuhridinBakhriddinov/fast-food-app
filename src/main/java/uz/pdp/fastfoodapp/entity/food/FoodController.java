@@ -2,6 +2,7 @@ package uz.pdp.fastfoodapp.entity.food;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +28,9 @@ public class FoodController {
 
     @CrossOrigin
     @GetMapping
+    @PreAuthorize(value = "hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<?> getFoods(){
-        return foodService.getFoods();
+//        return foodService.getFoods();
+        return ResponseEntity.ok("Foods");
     }
 }

@@ -17,14 +17,14 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class JwtProvider {
 
-    static final long expirationTime = 1000 * 60 * 60 * 24;
+    static final long expirationTime = 1000 * 60;
     static final String key = "secretKeyFoodfjasklfjdkafjdklfjklsfjaslfiaslfjaslfjdaslfjdslafjaslfdaslfkasfjdasjsklfjdkljslfjsdlkfjsdalfjdasfdafklsjfklajasiofjail";
 
     public String generateToken(String username, Set<Roles> roles, Set<Permission> permissions) {
         /**
          *  look at expiration date is 10 days
          */
-        Date expireDate = new Date(System.currentTimeMillis() + expirationTime * 10);
+        Date expireDate = new Date(System.currentTimeMillis() + expirationTime);
         String token = Jwts
                 .builder()
                 .setSubject(username)
@@ -48,5 +48,21 @@ public class JwtProvider {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public String generateRefreshToken(String username, Set<Roles> roles, Set<Permission> permissions) {
+        /**
+         *  look at expiration date is 30 days
+         */
+        Date expireDate = new Date(System.currentTimeMillis() + expirationTime * 10);
+        String token = Jwts
+                .builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(expireDate)
+                .addClaims(Map.of("roles", roles, "permissions", permissions))
+                .signWith(SignatureAlgorithm.HS512, key)
+                .compact();
+        return token;
     }
 }

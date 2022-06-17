@@ -25,7 +25,7 @@ public class VerificationService {
 
     private final String ACCOUNT_SID_TWILIO = "AC62c2958e5f305931ffdd03f18d6c0a93";
 
-    private final String AUTH_TOKEN_TWILIO = "ACaf48ea62d7933a83d87de612e5d74645";
+    private final String AUTH_TOKEN_TWILIO = "61fdeeda4ceddd16edf3248743ab3c9c";
 
     public Integer sendSms(String phoneNumber) {
 
@@ -54,8 +54,10 @@ public class VerificationService {
          *  sending sms by using twilio
          */
 //        Twilio.init(ACCOUNT_SID_TWILIO, AUTH_TOKEN_TWILIO);
-//        Message message = Message.creator(new PhoneNumber(phoneNumber), new PhoneNumber("+14094027971"), "Food Delivery \nYour code is: " + code).create();
+//        Message message = Message.creator(new PhoneNumber(phoneNumber), new PhoneNumber("+19784875973"), "Food Delivery \nYour code is: " + code).create();
 //        System.out.println(message.getSid());
+
+        System.out.println(code);
 
         Optional<VerificationCodes> optionalByPhoneNumber = verificationRepository.findByPhoneNumber(phoneNumber);
         if (optionalByPhoneNumber.isPresent()) {
@@ -86,11 +88,11 @@ public class VerificationService {
         if (smsCode == null)
             return ResponseEntity.status(409).body(new ApiResponse("Something went wrong !!!, Please try again", false));
 
-        Optional<User> optionalUser = userRepository.findByPhoneNumber(phoneNumber);
-        if (optionalUser.isPresent()) {
-            optionalUser.get().setSmsCode(passwordEncoder.encode(smsCode.toString()));
-            userRepository.save(optionalUser.get());
-        }
+//        Optional<User> optionalUser = userRepository.findByPhoneNumber(phoneNumber);
+//        if (optionalUser.isPresent()) {
+//            optionalUser.get().setSmsCode(passwordEncoder.encode(smsCode.toString()));
+//            userRepository.save(optionalUser.get());
+//        }
         return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent", true));
     }
 

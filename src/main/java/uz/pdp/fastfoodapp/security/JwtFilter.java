@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+import static org.apache.http.HttpHeaders.AUTHORIZATION;
+
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
@@ -24,7 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authentication = request.getHeader("Authentication");
+        String authentication = request.getHeader( AUTHORIZATION);
         if (authentication != null && authentication.startsWith("Bearer") && authentication.length() > 7) {
             authentication = authentication.substring(7);
             String number = jwtProvider.getUsernameFromToken(authentication);
@@ -36,6 +38,12 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
+            else{
+                SecurityContextHolder.getContext().setAuthentication(null);
+            }
+        }
+        else {
+            SecurityContextHolder.getContext().setAuthentication(null);
         }
         filterChain.doFilter(request, response);
     }
