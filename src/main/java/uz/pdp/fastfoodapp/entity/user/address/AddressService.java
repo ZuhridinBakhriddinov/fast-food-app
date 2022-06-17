@@ -94,4 +94,13 @@ public class AddressService {
             return new ApiResponse("Error", false);
         }
     }
+
+    public ApiResponse getAllAddressByUserId(UUID userId) {
+        List<getAllAddressByUserId> byUserId = addressRepository.findByUserId(userId);
+        if (byUserId.isEmpty()) {
+            return new ApiResponse("Address not found", false);
+        }
+        return new ApiResponse("Success", true, byUserId);
+    }
+
 }
