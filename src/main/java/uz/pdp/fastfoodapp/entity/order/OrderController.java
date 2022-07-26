@@ -43,8 +43,8 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/webhook")
     public void handle(@RequestBody String payload, @RequestHeader(name = "Stripe-Signature") String signHeader, HttpServletResponse response) {
-        String endpointSecret = "whsec_caf7231c252f6538d81bf44b2f1ee721c5b42440b2211aa88ed4dbc1aa3393b8";
-        Stripe.apiKey = "sk_test_51KhfDrGNKbQ4R3wKLw6i1KUhcMkIpIxduTX2JOaooftmI9u3lxS8j4apN9kYJ9UZVRl9230Jn1kWBALtzysklSEx007WRYy1hA";
+        String endpointSecret = "";
+        Stripe.apiKey = "";
 //        String endpointSecret = webhookKey;
 //        Stripe.apiKey = stripeApiKey;
 //      to activate:  stripe listen --forward-to localhost:8081/order/webhook
@@ -68,7 +68,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/purchase-products")
     public HttpEntity<?> createStripeSession(@RequestBody OrderListDto orderItems) {
-        Stripe.apiKey = "sk_test_51KhfDrGNKbQ4R3wKLw6i1KUhcMkIpIxduTX2JOaooftmI9u3lxS8j4apN9kYJ9UZVRl9230Jn1kWBALtzysklSEx007WRYy1hA";
+        Stripe.apiKey = "";
         UUID userId = orderItems.orderInfo.userId;
         Optional<User> optionalUser = userRepository.findById(userId);
 
