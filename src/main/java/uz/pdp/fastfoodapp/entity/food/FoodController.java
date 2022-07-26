@@ -18,6 +18,7 @@ public class FoodController {
 //        return foodService.getAllFoods();
 //    }
 
+
     @PostMapping
     public ResponseEntity<?> addFood(
             @RequestPart(name = "food") FoodDto foodDto,
@@ -26,11 +27,11 @@ public class FoodController {
         return foodService.addFood(foodDto, image);
     }
 
-    @GetMapping("/getFoods")
+/*    @GetMapping("/getFoods")
     public ResponseEntity<?> getFoods() {
         return foodService.getFoodsUz();
         //    return ResponseEntity.ok("Foods");
-    }
+    }*/
 
     @GetMapping("/getFoods/{name}")
     public ResponseEntity<?> getFoodsEn(@PathVariable String name) {

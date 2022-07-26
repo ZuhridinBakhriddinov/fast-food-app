@@ -20,8 +20,6 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import uz.pdp.fastfoodapp.entity.user.UserRepository;
 import uz.pdp.fastfoodapp.security.JwtFilter;
 
@@ -78,8 +76,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/swagger-ui/**",
                 "/api/v1/verification/**",
                 "/api/v1/getFile/**",
-                "/api/v1/food/getFoods",
-                "/csrf"
+                "/csrf",
+                "api/v1/food/**"
 
         };
         http.cors().and()
@@ -92,8 +90,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(ways)
                 .permitAll()
                 .anyRequest()
-                .permitAll();
-//                .authenticated();
+//                .permitAll();
+                .authenticated();
 //        http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }

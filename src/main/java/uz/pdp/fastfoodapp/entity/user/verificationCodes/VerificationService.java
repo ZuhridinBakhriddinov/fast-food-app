@@ -89,7 +89,7 @@ public class VerificationService {
 //            optionalUser.get().setSmsCode(passwordEncoder.encode(smsCode.toString()));
 //            userRepository.save(optionalUser.get());
 //        }
-        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent "+smsCode, true));
+        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent smsCode: "+smsCode, true));
     }
 
     public HttpEntity<?> sendSmsForUserRegistration(String phoneNumber) {
@@ -100,7 +100,7 @@ public class VerificationService {
         Integer smsCode = sendSms(phoneNumber);
         if (smsCode == null)
             return ResponseEntity.status(409).body(new ApiResponse("Something went wrong !!!, Please try again", false));
-        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent "+smsCode, true));
+        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent smsCode: "+smsCode, true));
     }
 
     public HttpEntity<?> validateSmsForUserRegistration(VerificationCodeDto verificationCodeDto) {
