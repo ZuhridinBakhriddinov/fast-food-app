@@ -1,3 +1,4 @@
+/*
 package uz.pdp.fastfoodapp.common;
 
 import lombok.RequiredArgsConstructor;
@@ -87,3 +88,4 @@ public class DataLoader implements CommandLineRunner {
     }
 
 }
+*/
