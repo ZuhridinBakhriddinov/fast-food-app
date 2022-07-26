@@ -24,7 +24,7 @@ public class DistrictService {
 
     public ApiResponse getDistrictById(UUID uuid) {
         Optional<District> byId = districtRepository.findById(uuid);
-        if (byId.isEmpty()) {
+        if (!byId.isPresent()) {
             return new ApiResponse("Not found", false);
         }
         return new ApiResponse("Successfully", true, byId);
@@ -41,7 +41,7 @@ public class DistrictService {
 
     public ApiResponse editDistrict(UUID uuid, District district) {
         Optional<District> byId = districtRepository.findById(uuid);
-        if (byId.isEmpty()) {
+        if (!byId.isPresent()) {
             return new ApiResponse("Not found", false);
         }
         District edit = byId.get();

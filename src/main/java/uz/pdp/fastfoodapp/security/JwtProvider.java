@@ -10,6 +10,7 @@ import uz.pdp.fastfoodapp.entity.user.permission.Permission;
 import uz.pdp.fastfoodapp.entity.user.role.Roles;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,12 +26,18 @@ public class JwtProvider {
          *  look at expiration date is 10 days
          */
         Date expireDate = new Date(System.currentTimeMillis() + expirationTime);
+        Map<String,Object> map = new HashMap<String,Object>() {
+            {
+                put("roles", roles);
+                put("permissions", permissions);
+            }
+        };
         String token = Jwts
                 .builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
-                .addClaims(Map.of("roles", roles, "permissions", permissions))
+                .addClaims(map)
                 .signWith(SignatureAlgorithm.HS512, key)
                 .compact();
         return token;
@@ -65,12 +72,18 @@ public class JwtProvider {
          *  look at expiration date is 30 days
          */
         Date expireDate = new Date(System.currentTimeMillis() + expirationTime * 7);
+        Map<String,Object> map = new HashMap<String,Object>() {
+            {
+                put("roles", roles);
+                put("permissions", permissions);
+            }
+        };
         String token = Jwts
                 .builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
-                .addClaims(Map.of("roles", roles, "permissions", permissions))
+                .addClaims(map)
                 .signWith(SignatureAlgorithm.HS512, key)
                 .compact();
         return token;

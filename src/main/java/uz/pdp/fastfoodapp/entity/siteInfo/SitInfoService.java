@@ -25,7 +25,7 @@ public class SitInfoService {
 
     public ApiResponse getSitInfoById(UUID uuid) {
         Optional<SiteInfo> optionalSiteInfo = sitInfoRepository.findById(uuid);
-        if (optionalSiteInfo.isEmpty()) {
+        if (!optionalSiteInfo.isPresent()) {
             return new ApiResponse("Not found", false);
         }
         return new ApiResponse("Success", true, optionalSiteInfo);
@@ -43,7 +43,7 @@ public class SitInfoService {
 
     public ApiResponse editSitInfo(SiteInfo siteInfo, UUID uuid) {
         Optional<SiteInfo> optionalSiteInfo = sitInfoRepository.findById(uuid);
-        if (optionalSiteInfo.isEmpty()) {
+        if (!optionalSiteInfo.isPresent()) {
             return new ApiResponse("SitInfo not found", false);
         }
         try {

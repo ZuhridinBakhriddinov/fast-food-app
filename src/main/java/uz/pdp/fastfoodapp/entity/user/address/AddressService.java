@@ -10,7 +10,6 @@ import uz.pdp.fastfoodapp.entity.user.district.DistrictRepository;
 import uz.pdp.fastfoodapp.template.ApiResponse;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public class AddressService {
 
     public ApiResponse getAddressById(UUID uuid) {
         Optional<Address> byId = addressRepository.findById(uuid);
-        if (byId.isEmpty()) {
+        if (!byId.isPresent()) {
             return new ApiResponse("Address not found", false);
         }
         return new ApiResponse("Successfully", true, byId);
@@ -41,11 +40,11 @@ public class AddressService {
 
     public ApiResponse addAddress(AddressDto addressDto) {
         Optional<User> userId = userRepository.findById(addressDto.getUserId());
-        if (userId.isEmpty()) {
+        if (!userId.isPresent()) {
             return new ApiResponse("User not found", false);
         }
         Optional<District> districtId = districtRepository.findById(addressDto.getDistrictId());
-        if (districtId.isEmpty()) {
+        if (!districtId.isPresent()) {
             return new ApiResponse("District not found", false);
         }
         try {
@@ -60,18 +59,18 @@ public class AddressService {
 
     public ApiResponse editAddress(UUID addressId, AddressDto addressDto) {
         Optional<Address> optionalAddress = addressRepository.findById(addressId);
-        if (optionalAddress.isEmpty()) {
+        if (!optionalAddress.isPresent()) {
             return new ApiResponse("Address not found", false);
         }
         Address address = optionalAddress.get();
         Optional<User> optionalUser = userRepository.findById(addressDto.getUserId());
-        if (optionalUser.isEmpty()) {
+        if (!optionalUser.isPresent()) {
             return new ApiResponse("User not found", false);
         }
         address.setUser(optionalUser.get());
         address.setName(addressDto.getName());
         Optional<District> districtOptional = districtRepository.findById(addressDto.getDistrictId());
-        if (districtOptional.isEmpty()) {
+        if (!districtOptional.isPresent()) {
             return new ApiResponse("District not found", false);
         }
         address.setDistrict(districtOptional.get());

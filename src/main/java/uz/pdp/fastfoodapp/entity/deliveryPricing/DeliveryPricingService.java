@@ -2,7 +2,7 @@ package uz.pdp.fastfoodapp.entity.deliveryPricing;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uz.pdp.fastfoodapp.entity.siteInfo.SiteInfo;
+import uz.pdp.fastfoodapp.exception.RestException;
 import uz.pdp.fastfoodapp.template.ApiResponse;
 
 import java.util.Optional;
@@ -15,7 +15,7 @@ public class DeliveryPricingService {
 
     public ApiResponse getDeliveryPricingById(UUID uuid) {
         Optional<DeliveryPricing> optionalDP = deliveryPricingRepository.findById(uuid);
-        if (optionalDP.isEmpty()) {
+        if (!optionalDP.isPresent()) {
             return new ApiResponse("Not found", false);
         }
         return new ApiResponse("Success", true, optionalDP);
@@ -33,13 +33,9 @@ public class DeliveryPricingService {
 
     public ApiResponse editDeliveryPricing(DeliveryPricing deliveryPricing, UUID uuid) {
 //        Optional<SiteInfo> optionalAgent = deliveryPricingRepository.findById(uuid);
-        Optional<DeliveryPricing> optionalDeliveryPricing = deliveryPricingRepository.findById(uuid);
-        if (optionalDeliveryPricing.isEmpty()) {
+        DeliveryPricing editDeliveryPricing = deliveryPricingRepository.findById(uuid).orElseThrow(() -> RestException.notFound("Not found"));
 
-            return new ApiResponse("DP not found", false);
-        }
         try {
-            DeliveryPricing editDeliveryPricing = optionalDeliveryPricing.get();
             editDeliveryPricing.setDeliveryPricePerKm(deliveryPricing.getDeliveryPricePerKm());
             editDeliveryPricing.setInitialDeliveryPrice(deliveryPricing.getInitialDeliveryPrice());
             DeliveryPricing save = deliveryPricingRepository.save(editDeliveryPricing);

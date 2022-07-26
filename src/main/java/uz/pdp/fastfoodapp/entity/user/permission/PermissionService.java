@@ -24,7 +24,7 @@ public class PermissionService {
 
     public ApiResponse getPermissionById(UUID uuid) {
         Optional<Permission> byId = permissionRepository.findById(uuid);
-        if (byId.isEmpty()) {
+        if (!byId.isPresent()) {
             return new ApiResponse("Not found", false);
         }
         return new ApiResponse("Successfully", true, byId);
@@ -41,7 +41,7 @@ public class PermissionService {
 
     public ApiResponse editPermission(UUID uuid, Permission permission) {
         Optional<Permission> byId = permissionRepository.findById(uuid);
-        if (byId.isEmpty()) {
+        if (!byId.isPresent()) {
             return new ApiResponse("Not found", false);
         }
         Permission edit = byId.get();
