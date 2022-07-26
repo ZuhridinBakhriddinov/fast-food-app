@@ -5,7 +5,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${app.domain}/verification")
@@ -15,7 +17,7 @@ public class VerificationController {
 
 
     @GetMapping("/send/forRegister/{phoneNumber}")
-    public HttpEntity<?> sendSmsForUserRegistration(@PathVariable String phoneNumber) {
+    public HttpEntity<?> sendSmsForUserRegistration(@PathVariable @NotBlank(message = "Phone Number not blank") String phoneNumber) {
         return verificationService.sendSmsForUserRegistration(phoneNumber);
     }
 

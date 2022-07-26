@@ -21,6 +21,5 @@ public class RegisterDto {
     private String phoneNumber;
 
     @NotNull(message = "Field is required")
-//    @NotBlank(message = "SMS code cannot be blank.")
-    private int smsCode;
+    private Integer smsCode;
 }

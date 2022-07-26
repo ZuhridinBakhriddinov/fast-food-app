@@ -6,9 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,13 +20,12 @@ import uz.pdp.fastfoodapp.entity.user.role.RolesRepository;
 import uz.pdp.fastfoodapp.entity.user.verificationCodes.VerificationService;
 import uz.pdp.fastfoodapp.security.JwtProvider;
 import uz.pdp.fastfoodapp.template.ApiResponse;
+import uz.pdp.fastfoodapp.template.ApiResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
-
-import static org.springframework.security.config.web.server.SecurityWebFiltersOrder.ANONYMOUS_AUTHENTICATION;
 
 @Service
 @RequiredArgsConstructor
@@ -57,21 +53,22 @@ public class AuthService implements UserDetailsService {
         User user = new User(
                 registerDto.getFullName(),
                 registerDto.getPhoneNumber(),
-            //    passwordEncoder.encode(String.valueOf(registerDto.getSmsCode())),
+                //    passwordEncoder.encode(String.valueOf(registerDto.getSmsCode())),
                 roleUser,
                 permissions
         );
         User savedUser = userRepository.save(user);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                savedUser.getPhoneNumber(), registerDto.getSmsCode());
-        authenticationManager.authenticate(authenticationToken);
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+//                savedUser.getPhoneNumber(), registerDto.getSmsCode());
+//        authenticationManager.authenticate(authenticationToken);
         String access_token = jwtProvider.generateToken(user.getPhoneNumber(), user.getRoles(), user.getPermissions());
         String refresh_token = jwtProvider.generateRefreshToken(user.getPhoneNumber(), user.getRoles(), user.getPermissions());
         Map<String, Object> registerMap = new HashMap<>();
         registerMap.put("access_token", access_token);
         registerMap.put("refresh_token", refresh_token);
         registerMap.put("user_id", savedUser.getId().toString());
-        return ResponseEntity.status(200).body(new ApiResponse("Registered Successfully", true, registerMap));
+        System.out.println(registerMap);
+        return ResponseEntity.status(200).body(new ApiResult("Registered Successfully", true, registerMap));
     }
 
     @Override
@@ -80,7 +77,7 @@ public class AuthService implements UserDetailsService {
     }
 
     public HttpEntity<?> loginUser(@Valid LoginDto loginDto) {
-        ApiResponse apiResponse = verificationService.validateSmsCode(loginDto.getPhoneNumber(), loginDto.getCodeSent());
+        ApiResponse apiResponse = verificationService.validateSmsCode(loginDto.getPhoneNumber(), loginDto.getSmsCode());
         if (!apiResponse.isSuccess())
             return ResponseEntity.status(404).body(apiResponse);
 
@@ -96,14 +93,17 @@ public class AuthService implements UserDetailsService {
         loginMap.put("access_token", access_token);
         loginMap.put("refresh_token", refresh_token);
         loginMap.put("user_id", user.getId().toString());
-        return ResponseEntity.status(200).body(new ApiResponse("Successful signed in.", true, loginMap));
+        loginMap.put("role", user.getRoles().stream().map(roles -> roles.getRole().name()));
+        return ResponseEntity.status(200).body(new ApiResult("Successful signed in.", true, loginMap));
     }
 
     public HttpEntity<?> refreshAccessToken(HttpServletRequest request, HttpServletResponse response) {
         String authentication = request.getHeader("Authorization");
         if (authentication != null && authentication.startsWith("Bearer") && authentication.length() > 7) {
             authentication = authentication.substring(7);
+            System.out.println(authentication);
             String number = jwtProvider.getUsernameFromToken(authentication);
+            System.out.println(number);
             Optional<User> phoneNumber = userRepository.findByPhoneNumber(number);
             if (!phoneNumber.isPresent())
                 return ResponseEntity.status(200).body(new ApiResponse("This user did not registered yet", false));

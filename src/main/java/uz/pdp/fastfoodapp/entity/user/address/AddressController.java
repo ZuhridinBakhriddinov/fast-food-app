@@ -14,6 +14,7 @@ public class AddressController {
     @Autowired
     AddressService addressService;
 
+
     @GetMapping
     public HttpEntity<?> getAllAddress() {
         ApiResponse allAddress = addressService.getAllAddress();
@@ -27,7 +28,7 @@ public class AddressController {
 //    }
 
     @PostMapping
-    public HttpEntity<?> addAddress(@RequestPart(name = "address") AddressDto addressDto) {
+    public HttpEntity<?> addAddress(@RequestBody AddressDto addressDto) {
         ApiResponse apiResponse = addressService.addAddress(addressDto);
         return ResponseEntity.ok(apiResponse);
     }

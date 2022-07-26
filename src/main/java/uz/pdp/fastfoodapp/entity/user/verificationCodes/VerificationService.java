@@ -1,14 +1,10 @@
 package uz.pdp.fastfoodapp.entity.user.verificationCodes;
 
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import uz.pdp.fastfoodapp.entity.user.User;
 import uz.pdp.fastfoodapp.entity.user.UserRepository;
 import uz.pdp.fastfoodapp.template.ApiResponse;
 
@@ -23,9 +19,9 @@ public class VerificationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private final String ACCOUNT_SID_TWILIO = "";
+    private final String ACCOUNT_SID_TWILIO = "ACb879375012eab6a0ed874018705caae6";
 
-    private final String AUTH_TOKEN_TWILIO = "";
+    private final String AUTH_TOKEN_TWILIO = "c08af28e76cda883ddc11fec9280bc2f";
 
     public Integer sendSms(String phoneNumber) {
 
@@ -33,7 +29,7 @@ public class VerificationService {
         /**
          * random code
          */
-        int code = (int) ((Math.random() * (999999 - 100000)) + 100000);
+        int code = (int) ((Math.random() * (9999 - 1000)) + 1000);
         LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(30);
 
         /**
@@ -53,9 +49,9 @@ public class VerificationService {
         /**
          *  sending sms by using twilio
          */
-//        Twilio.init(ACCOUNT_SID_TWILIO, AUTH_TOKEN_TWILIO);
-//        Message message = Message.creator(new PhoneNumber(phoneNumber), new PhoneNumber("+19784875973"), "Food Delivery \nYour code is: " + code).create();
-//        System.out.println(message.getSid());
+/*        Twilio.init(ACCOUNT_SID_TWILIO, AUTH_TOKEN_TWILIO);
+        Message message = Message.creator(new PhoneNumber(phoneNumber), new PhoneNumber("+19107089958"), "Food Delivery \nYour code is: " + code).create();
+        System.out.println(message.getSid());*/
 
         System.out.println(code);
 
@@ -93,7 +89,7 @@ public class VerificationService {
 //            optionalUser.get().setSmsCode(passwordEncoder.encode(smsCode.toString()));
 //            userRepository.save(optionalUser.get());
 //        }
-        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent", true));
+        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent "+smsCode, true));
     }
 
     public HttpEntity<?> sendSmsForUserRegistration(String phoneNumber) {
@@ -104,7 +100,7 @@ public class VerificationService {
         Integer smsCode = sendSms(phoneNumber);
         if (smsCode == null)
             return ResponseEntity.status(409).body(new ApiResponse("Something went wrong !!!, Please try again", false));
-        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent", true));
+        return ResponseEntity.status(200).body(new ApiResponse("SMS successfully sent "+smsCode, true));
     }
 
     public HttpEntity<?> validateSmsForUserRegistration(VerificationCodeDto verificationCodeDto) {

@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.pdp.fastfoodapp.entity.user.permission.Permission;
-import uz.pdp.fastfoodapp.entity.user.role.Role;
 import uz.pdp.fastfoodapp.entity.user.role.Roles;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
@@ -47,7 +46,8 @@ public class User extends AbsEntity implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id"))
     Set<Permission> permissions;
-    private String password = "12345";
+
+    private String password ;
 
     public User(String fullName, String phoneNumber, Set<Roles> roles, Set<Permission> permissions) {
         this.fullName = fullName;

@@ -17,6 +17,6 @@ public class LoginDto {
     private String phoneNumber;
 
     @NotNull(message = "code cannot be null.")
-    private int codeSent;
+    private int smsCode;
 
 }

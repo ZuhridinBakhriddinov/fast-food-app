@@ -7,7 +7,6 @@ import uz.pdp.fastfoodapp.entity.order.Order;
 import uz.pdp.fastfoodapp.template.AbsEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -23,6 +22,8 @@ public class OrderItem extends AbsEntity {
     Food food;
     @ManyToOne
     Order order;
+    Integer quantity;
+
 
 }
 

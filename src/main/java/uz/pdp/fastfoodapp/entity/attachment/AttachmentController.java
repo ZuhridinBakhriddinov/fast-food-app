@@ -16,7 +16,7 @@ import java.util.UUID;
 
 // Zuhridin Bakhriddinov 3/15/2022 12:23 PM
 @RestController
-@RequestMapping("/getFile")
+@RequestMapping("${app.domain}" +"/getFile")
 public class AttachmentController {
 
     @Autowired

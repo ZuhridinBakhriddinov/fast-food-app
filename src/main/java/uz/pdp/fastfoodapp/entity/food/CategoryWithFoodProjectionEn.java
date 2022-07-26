@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.List;
 import java.util.UUID;
 
-public interface CategoryWithFoodProjection {
+public interface CategoryWithFoodProjectionEn {
     UUID getCategoryId();
     String getCategoryName();
-    @Value("#{@foodRepository.getFoods(target.categoryId )}")
+    @Value("#{@foodRepository.getFoodsEn(target.categoryId )}")
     List<FoodProjection> getFoodInfo();
 
 }

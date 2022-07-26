@@ -13,13 +13,27 @@ public interface FoodRepository extends JpaRepository<Food, UUID> {
             "                   price as price,\n" +
             "                   cast(a.id as varchar) as imageId\n" +
             "           from foods f join attachments a on a.id = f.image_id\n" +
-            "where f.category_id =:categoryId",nativeQuery = true)
-    List<FoodProjection> getFoods(UUID categoryId );
+            "where f.category_id =:categoryId", nativeQuery = true)
+    List<FoodProjection> getFoodsUz(UUID categoryId);
+
+    @Query(value = "select cast(f.id as varchar) foodId,\n" +
+            "                   f.name_en as name,\n" +
+            "                   price as price,\n" +
+            "                   cast(a.id as varchar) as imageId\n" +
+            "           from foods f join attachments a on a.id = f.image_id\n" +
+            "where f.category_id =:categoryId", nativeQuery = true)
+    List<FoodProjection> getFoodsEn(UUID categoryId);
 
 
-    @Query(nativeQuery = true,value = "select cast(c.id as varchar) as categoryId ,c.name_uz as categoryName\n" +
+    @Query(nativeQuery = true, value = "select cast(c.id as varchar) as categoryId ,c.name_uz as categoryName\n" +
             "from categories c")
-    List<CategoryWithFoodProjection> getFoodsByCategory();
+    List<CategoryWithFoodProjectionUz> getFoodsByCategoryUz();
+
+
+
+    @Query(nativeQuery = true, value = "select cast(c.id as varchar) as categoryId ,c.name_en as categoryName\n" +
+            "from categories c")
+    List<CategoryWithFoodProjectionEn> getFoodsByCategoryEn();
 
 
 }

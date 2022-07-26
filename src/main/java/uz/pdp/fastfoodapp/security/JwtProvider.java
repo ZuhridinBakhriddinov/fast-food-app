@@ -2,14 +2,14 @@ package uz.pdp.fastfoodapp.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import uz.pdp.fastfoodapp.entity.user.permission.Permission;
-import uz.pdp.fastfoodapp.entity.user.role.Role;
 import uz.pdp.fastfoodapp.entity.user.role.Roles;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,7 +17,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class JwtProvider {
 
-    static final long expirationTime = 1000 * 60;
+    static final long expirationTime = 1000 * 60 * 60 *24;
     static final String key = "secretKeyFoodfjasklfjdkafjdklfjklsfjaslfiaslfjaslfjdaslfjdslafjaslfdaslfkasfjdasjsklfjdkljslfjsdlkfjsdalfjdasfdafklsjfklajasiofjail";
 
     public String generateToken(String username, Set<Roles> roles, Set<Permission> permissions) {
@@ -34,6 +34,16 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS512, key)
                 .compact();
         return token;
+    }
+    public String generatedToken(String phoneNumber, boolean forAccess) {
+        Date expire = new Date(System.currentTimeMillis() + (forAccess ? expirationTime : expirationTime*7));
+        return Jwts
+                .builder()
+                .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(key)))
+                .setSubject(phoneNumber)
+                .setIssuedAt(new Date())
+                .setExpiration(expire)
+                .compact();
     }
 
     public String getUsernameFromToken(String token) {
@@ -54,7 +64,7 @@ public class JwtProvider {
         /**
          *  look at expiration date is 30 days
          */
-        Date expireDate = new Date(System.currentTimeMillis() + expirationTime * 10);
+        Date expireDate = new Date(System.currentTimeMillis() + expirationTime * 7);
         String token = Jwts
                 .builder()
                 .setSubject(username)

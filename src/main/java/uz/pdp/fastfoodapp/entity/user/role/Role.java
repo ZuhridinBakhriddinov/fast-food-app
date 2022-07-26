@@ -5,5 +5,5 @@ public enum Role {
     ADMIN,
     ROLE_CUSTOMER,
     DELIVERER,
-    OTHER
+    COOK
 }
