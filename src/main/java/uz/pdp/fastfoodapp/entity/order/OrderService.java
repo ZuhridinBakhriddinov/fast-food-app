@@ -131,7 +131,8 @@ public class OrderService {
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
                 .setCancelUrl("http://localhost:8080/failed")
-                .setSuccessUrl("http://localhost:3000/success")
+                //.setSuccessUrl("http://localhost:3000/success")
+                .setSuccessUrl("https://fast-food-client.herokuapp.com/success")
                 .setClientReferenceId(user.getId().toString())
                 .addAllLineItem(lineItems)
                 .build();
