@@ -11,7 +11,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://fast-food-client.herokuapp.com")
 public class AuthControllerCookie {
 
 

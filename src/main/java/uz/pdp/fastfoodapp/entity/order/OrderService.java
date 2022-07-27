@@ -119,7 +119,8 @@ public class OrderService {
                 myOrder.setStatus(OrderStatus.ACCEPTED);
                 orderRepository.save(order);
             }
-            return ResponseEntity.ok().body("http://localhost:3000/success");
+        //    return ResponseEntity.ok().body("http://localhost:3000/success");
+            return ResponseEntity.ok().body("https://fast-food-client.herokuapp.com/success");
 
         }
 
