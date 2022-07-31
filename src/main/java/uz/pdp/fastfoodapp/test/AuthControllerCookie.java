@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.fastfoodapp.entity.authService.LoginDto;
+import uz.pdp.fastfoodapp.template.AppConstants;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -11,7 +12,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://fast-food-client.herokuapp.com")
+@CrossOrigin(origins = AppConstants.frontHost)
 public class AuthControllerCookie {
 
 

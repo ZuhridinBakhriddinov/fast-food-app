@@ -77,7 +77,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/api/v1/verification/**",
                 "/api/v1/getFile/**",
                 "/csrf",
-                "api/v1/food/**"
+                "/api/v1/food/**"
 
         };
         http.cors().and()

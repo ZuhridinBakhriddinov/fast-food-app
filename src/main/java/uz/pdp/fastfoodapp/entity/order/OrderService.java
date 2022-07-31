@@ -22,6 +22,7 @@ import uz.pdp.fastfoodapp.entity.user.User;
 import uz.pdp.fastfoodapp.entity.user.address.Address;
 import uz.pdp.fastfoodapp.entity.user.address.AddressRepository;
 import uz.pdp.fastfoodapp.template.ApiResponse;
+import uz.pdp.fastfoodapp.template.AppConstants;
 
 import java.util.List;
 import java.util.Optional;
@@ -119,8 +120,7 @@ public class OrderService {
                 myOrder.setStatus(OrderStatus.ACCEPTED);
                 orderRepository.save(order);
             }
-        //    return ResponseEntity.ok().body("http://localhost:3000/success");
-            return ResponseEntity.ok().body("https://fast-food-client.herokuapp.com/success");
+            return ResponseEntity.ok().body(AppConstants.frontHost +"/success");
 
         }
 
@@ -131,8 +131,7 @@ public class OrderService {
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
                 .setCancelUrl("http://localhost:8080/failed")
-                //.setSuccessUrl("http://localhost:3000/success")
-                .setSuccessUrl("https://fast-food-client.herokuapp.com/success")
+                .setSuccessUrl(AppConstants.frontHost+"/success")
                 .setClientReferenceId(user.getId().toString())
                 .addAllLineItem(lineItems)
                 .build();
